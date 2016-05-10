@@ -182,7 +182,6 @@ static NSString *const VENTouchLockUserDefaultsKeyTouchIDActivated = @"VENTouchL
         VENTouchLockSplashViewController *splashViewController = [[self.splashViewControllerClass alloc] init];
         if ([splashViewController isKindOfClass:[VENTouchLockSplashViewController class]]) {
             UIWindow *mainWindow = [[UIApplication sharedApplication].windows firstObject];
-            UIViewController *rootViewController = [UIViewController ventouchlock_topMostController];
             UIViewController *displayController;
             if (self.appearance.splashShouldEmbedInNavigationController) {
                 displayController = [splashViewController ventouchlock_embeddedInNavigationControllerWithNavigationBarClass:self.appearance.navigationBarClass];
@@ -211,6 +210,7 @@ static NSString *const VENTouchLockUserDefaultsKeyTouchIDActivated = @"VENTouchL
             }
             dispatch_async(dispatch_get_main_queue(), ^{
                 self.backgroundLockVisible = YES;
+                UIViewController *rootViewController = [UIViewController ventouchlock_topMostController];
                 [rootViewController presentViewController:displayController animated:NO completion:nil];
             });
         }
